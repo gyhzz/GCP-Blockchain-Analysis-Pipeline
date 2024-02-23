@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eth-subscription-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eth-subscription
+  template:
+    metadata:
+      labels:
+        app: eth-subscription
+    spec:
+      containers:
+      - name: eth-subscription
+        image: gcr.io/blockchain-analysis-pipeline/eth_subscription:v1
+        ports:
+        - containerPort: 80
