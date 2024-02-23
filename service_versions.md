@@ -8,3 +8,4 @@ This service acts as a streaming data source for Ethereum blockchain data by con
 - Create separate config.ini file to store endpoint URL (might change this to an environment variable later to secure URL)
 - Create asynchro function to listen to endpoint for new messages
 - Prints each new JSON message to stdout
+- Application contains Dockerfile and deployment configuration
