@@ -12,8 +12,10 @@ spec:
       labels:
         app: eth-subscription
     spec:
+      serviceAccountName: gcs-writer-sa
       containers:
       - name: eth-subscription
-        image: gcr.io/blockchain-analysis-pipeline/eth_subscription:v1
+        image: gcr.io/blockchain-analysis-pipeline/eth_subscription:v2
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
