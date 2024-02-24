@@ -6,8 +6,8 @@ metadata:
     strimzi.io/cluster: kafka-service-cluster
   namespace: kafka
 spec:
-  partitions: 3
-  replicas: 3
+  partitions: 1
+  replicas: 1
 
 # Use the code below to create multiple kafka topics
 # ---
