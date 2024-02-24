@@ -15,7 +15,7 @@ spec:
       serviceAccountName: gcs-writer-sa
       containers:
       - name: eth-listener
-        image: gcr.io/blockchain-analysis-pipeline/eth_listener:v1
+        image: gcr.io/blockchain-analysis-pipeline/eth-listener:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
