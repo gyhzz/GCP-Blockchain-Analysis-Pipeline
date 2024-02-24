@@ -16,5 +16,5 @@ EXPOSE 80
 # Define environment variable
 ENV NAME World
 
-# Run eth-subscription.py when the container launches
-CMD ["python", "eth_subscription.py"]
+# Run eth_listener.py when the container launches
+CMD ["python", "eth_listener.py"]

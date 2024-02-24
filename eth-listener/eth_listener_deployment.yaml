@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eth-subscription-deployment
+  name: eth-listener-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eth-subscription
+      app: eth-listener
   template:
     metadata:
       labels:
-        app: eth-subscription
+        app: eth-listener
     spec:
       serviceAccountName: gcs-writer-sa
       containers:
-      - name: eth-subscription
-        image: gcr.io/blockchain-analysis-pipeline/eth_subscription:v2
+      - name: eth-listener
+        image: gcr.io/blockchain-analysis-pipeline/eth_listener:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
