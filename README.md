@@ -28,6 +28,7 @@ This will be the main message broadcasting service for stream processing pipelin
 - To overcome this, configure your own cluster instead of using autopilot
 - Use 3 nodes per pool with 32-standard-2 machine and don't enable node scaling
 - The kafka cluster should be able to run comfortably in this set up
+- To check current resource utilization, go to IAM and Admin > Quotas and System Limits > Search for global_in_use_addresses > Compute Engine API
 
 ##### V1 
 - Deployed a kafka cluster to GKE using strimzi with 3 replicas
