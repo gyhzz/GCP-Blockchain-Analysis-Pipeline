@@ -21,7 +21,7 @@ This service acts as a streaming data source for Ethereum blockchain data by con
 #### Description
 This will be the main message broadcasting service for stream processing pipelines. It contains a kafka topic called eth-block-details which collects Ethereum block header details such as block number, block hash, and gas fee details and broadcasts to its subscribers. The service populating this kafka topic is a Cloud Functions instance running Pubsub which monitors the data lake of Ethereum Subscription Service and pushes new files to the GKE kafka cluster. Using Cloud Functions instead of having the kafka cluster use Pubsub to listen to bucket events effectively decouples and isolates the data source from data consumers. The intermediate data storage can always be changed without having to make much changes to this kafka service.
 
-- When deploying a kafka cluster in GKE in free trial period using strimzi, some services such as zookeeper and entity operator may have issues starting up due to limited quota
+- When deploying a kafka cluster in GKE in free trial period using strimzi, some services such as zookeeper and entity operator may have issues starting up due to limited quota if using GKE autopilot
 - In free trial, quota for CPU, memory, storage cannot be increased (sending in a request could be possible)
 - Will face GKE scaling issue even if replica set to 1
 - Kafka cluster may not run properly without zookeeper and entity operator do not start successfully
