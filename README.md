@@ -19,14 +19,14 @@ This service acts as a streaming data source for Ethereum blockchain data by con
 ### Kafka Service on GKE
 
 #### Description
-This will be the main message broadcasting service for stream processing pipelines. It contains a kafka topic called eth-block-details which collects Ethereum block header details such as block number, block hash, and gas fee details and broadcasts to its subscribers. The service populating this kafka topic is a Cloud Functions instance running Pubsub which monitors the data lake of Ethereum Subscription Service and pushes new files to the GKE kafka cluster. Using Cloud Functions instead of having the kafka cluster use Pubsub to listen to bucket events effectively decouples and isolates the data source from data consumers. The intermediate data storage can always be changed without having to make much changes to this kafka service.
+This will be the main message broadcasting service for stream processing pipelines. It contains a kafka topic called eth-block-details which collects Ethereum block numbers and broadcasts to its subscribers. The service populating this kafka topic is a Cloud Functions instance running Pubsub which monitors the data lake of Ethereum Subscription Service and pushes data of new files uploaded to the GKE kafka cluster. Using Cloud Functions instead of having the kafka cluster use Pubsub to listen to bucket events effectively decouples and isolates the data source from data consumers. The intermediate data storage can always be changed without having to make much changes to this kafka service.
 
 - When deploying a kafka cluster in GKE in free trial period using strimzi, some services such as zookeeper and entity operator may have issues starting up due to limited quota if using GKE autopilot
 - In free trial, quota for CPU, memory, storage cannot be increased (sending in a request could be possible)
 - Will face GKE scaling issue even if replica set to 1
 - Kafka cluster may not run properly without zookeeper and entity operator do not start successfully
 - To overcome this, configure your own cluster instead of using autopilot
-- Use 3 nodes per pool with 32-standard-2 machine and don't enable node scaling
+- Use 3 nodes per pool with e2-standard-2 machine and don't enable node scaling
 - The kafka cluster should be able to run comfortably in this set up
 - To check current resource utilization, go to IAM and Admin > Quotas and System Limits > Search for global_in_use_addresses > Compute Engine API
 
@@ -48,15 +48,15 @@ This will be the main message broadcasting service for stream processing pipelin
 This service monitors the blockchain-data-lake bucket for new file uploads. Each new file uploaded to this bucket will be pushed to a Pubsub topic which automatically triggers the cloud function. This cloud function collects the bucket name and file name from the event details, accesses the file and pulls the block number data. This block number is then sent to the kafka topic on GKE.
 
 ##### To upgrade in the future
-- Currently Python 3.12 has issues with the kafka python module giving an error of kafka.vendor.six.moves module not found
+- Currently, Python 3.12 has issues with the kafka python module giving an error of kafka.vendor.six.moves module not found
 - A temporary fix is to replace this module installation with this: pip install git+https://github.com/dpkp/kafka-python.git
 - Once the kafka module for Python 3.12 has been fixed, use the proper kafka module instead
 
 ##### V1 
 - Created Pubsub service that monitors the GCS bucket for new file uploads
-- Each new file upload sends a notification to this Pubsub topic which triggers the cloud function
+- Each new file uploaded sends a notification to this Pubsub topic which triggers the cloud function
 - Cloud function collects the bucket name and file name from event details
-- Sample structure of the pubsub event is included in gcs-notifications/pubsub_notifications_sample.json
+- Sample structure of the pubsub event message is included in gcs-notifications/pubsub_notifications_sample.json
 - The file is accessed and the block number is collected from the file
 - Block number is pushed to the kafka topic on GKE
 - Use the kafka_test_consumer_app.py to check for messages coming in in real-time
