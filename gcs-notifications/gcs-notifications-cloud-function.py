@@ -3,13 +3,16 @@ from kafka import KafkaProducer
 import base64
 import json
 # Testing
-from google.oauth2 import service_account
+# from google.oauth2 import service_account
 
+
+# # Initialize the GCS client
+# key_path = "C:\\Users\\Admin\\Desktop\\github\\blockchain-analysis-pipeline\\storage-object-creator-key.json"
+# credentials = service_account.Credentials.from_service_account_file(key_path)
+# storage_client = storage.Client(credentials=credentials)
 
 # Initialize the GCS client
-key_path = "C:\\Users\\Admin\\Desktop\\github\\blockchain-analysis-pipeline\\storage-object-creator-key.json"
-credentials = service_account.Credentials.from_service_account_file(key_path)
-storage_client = storage.Client(credentials=credentials)
+storage_client = storage.Client()
 
 # Kafka configuration
 KAFKA_BROKERS = '34.174.40.76:9094'  # Use the external IP and port for Kafka
@@ -52,13 +55,13 @@ def process_gcs_file_and_publish_to_kafka(event, context):
         print(f"Failed to process GCS file and publish to Kafka: {e}")
 
 
-# For testing
-if __name__ == '__main__':
-    # Simulate a Pub/Sub event
-    simulated_event = {
-        'data': base64.b64encode(b'{"bucket":"blockchain-data-lake","name":"ethereum_blocks/20240226/block19308031"}')
-    }
-    simulated_context = None
+# # For testing
+# if __name__ == '__main__':
+#     # Simulate a Pub/Sub event
+#     simulated_event = {
+#         'data': base64.b64encode(b'{"bucket":"blockchain-data-lake","name":"ethereum_blocks/20240226/block19308031"}')
+#     }
+#     simulated_context = None
     
-    # Call the main function
-    process_gcs_file_and_publish_to_kafka(simulated_event, simulated_context)
+#     # Call the main function
+#     process_gcs_file_and_publish_to_kafka(simulated_event, simulated_context)
