@@ -36,3 +36,7 @@ This will be the main message broadcasting service for stream processing pipelin
 - Currently there's 1 kafka topic deployed with 3 partitions and 3 replicas
 - This means that the data log of the kafka topic is split into 3 partitions, each having part of the full log. This allows each partition to be processed by a different node, allowing distributed processing
 - Each partition is also replicated 3 times across different nodes to increase data redundancy to reduce probability of data loss
+
+##### V2
+- Changed kafka cluster replica to 1 and kafka topic replica and partition to 1 to reduce resource allocation (due to GCP resource quota)
+- Added new listener to the kafka cluster to allow external communication
