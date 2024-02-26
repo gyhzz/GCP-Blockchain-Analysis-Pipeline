@@ -1,1 +1,0 @@
-### Dummy application to test if GKE cluster and nodes are running properly
