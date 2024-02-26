@@ -39,4 +39,24 @@ This will be the main message broadcasting service for stream processing pipelin
 
 ##### V2
 - Changed kafka cluster replica to 1 and kafka topic replica and partition to 1 to reduce resource allocation (due to GCP resource quota)
-- Added new listener to the kafka cluster to allow external communication
+- Added new listener with port 9094 to the kafka cluster to allow external communication
+
+
+### GCS Notification Service Using Cloud Function and Pubsub
+
+#### Description
+This service monitors the blockchain-data-lake bucket for new file uploads. Each new file uploaded to this bucket will be pushed to a Pubsub topic which automatically triggers the cloud function. This cloud function collects the bucket name and file name from the event details, accesses the file and pulls the block number data. This block number is then sent to the kafka topic on GKE.
+
+##### To upgrade in the future
+- Currently Python 3.12 has issues with the kafka python module giving an error of kafka.vendor.six.moves module not found
+- A temporary fix is to replace this module installation with this: pip install git+https://github.com/dpkp/kafka-python.git
+- Once the kafka module for Python 3.12 has been fixed, use the proper kafka module instead
+
+##### V1 
+- Created Pubsub service that monitors the GCS bucket for new file uploads
+- Each new file upload sends a notification to this Pubsub topic which triggers the cloud function
+- Cloud function collects the bucket name and file name from event details
+- Sample structure of the pubsub event is included in gcs-notifications/pubsub_notifications_sample.json
+- The file is accessed and the block number is collected from the file
+- Block number is pushed to the kafka topic on GKE
+- Use the kafka_test_consumer_app.py to check for messages coming in in real-time

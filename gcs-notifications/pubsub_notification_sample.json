@@ -1,0 +1,25 @@
+{
+  "data": {
+    "message": {
+      "attributes": {
+        "bucketId": "blockchain-data-lake",
+        "eventTime": "2024-02-26T13:10:13.018063Z",
+        "eventType": "OBJECT_FINALIZE",
+        "notificationConfig": "projects/_/buckets/blockchain-data-lake/notificationConfigs/3",
+        "objectGeneration": "1708953012993777",
+        "objectId": "ethereum_blocks/20240226/block19311950",
+        "payloadFormat": "JSON_API_V1"
+      },
+      "data": "ewogICJraW5kIjogInN0b3JhZ2Ujb2JqZWN0IiwKICAiaWQiOiAiYmxvY2tjaGFpbi1kYXRhLWxha2UvZXRoZXJldW1fYmxvY2tzLzIwMjQwMjI2L2Jsb2NrMTkzMTE5NTAvMTcwODk1MzAxMjk5Mzc3NyIsCiAgInNlbGZMaW5rIjogImh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMuY29tL3N0b3JhZ2UvdjEvYi9ibG9ja2NoYWluLWRhdGEtbGFrZS9vL2V0aGVyZXVtX2Jsb2NrcyUyRjIwMjQwMjI2JTJGYmxvY2sxOTMxMTk1MCIsCiAgIm5hbWUiOiAiZXRoZXJldW1fYmxvY2tzLzIwMjQwMjI2L2Jsb2NrMTkzMTE5NTAiLAogICJidWNrZXQiOiAiYmxvY2tjaGFpbi1kYXRhLWxha2UiLAogICJnZW5lcmF0aW9uIjogIjE3MDg5NTMwMTI5OTM3NzciLAogICJtZXRhZ2VuZXJhdGlvbiI6ICIxIiwKICAiY29udGVudFR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIsCiAgInRpbWVDcmVhdGVkIjogIjIwMjQtMDItMjZUMTM6MTA6MTMuMDE4WiIsCiAgInVwZGF0ZWQiOiAiMjAyNC0wMi0yNlQxMzoxMDoxMy4wMThaIiwKICAic3RvcmFnZUNsYXNzIjogIlNUQU5EQVJEIiwKICAidGltZVN0b3JhZ2VDbGFzc1VwZGF0ZWQiOiAiMjAyNC0wMi0yNlQxMzoxMDoxMy4wMThaIiwKICAic2l6ZSI6ICIxNTM2IiwKICAibWQ1SGFzaCI6ICI3S0YzWndKaDlIR3YrbTR0c2NPRnp3PT0iLAogICJtZWRpYUxpbmsiOiAiaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2Rvd25sb2FkL3N0b3JhZ2UvdjEvYi9ibG9ja2NoYWluLWRhdGEtbGFrZS9vL2V0aGVyZXVtX2Jsb2NrcyUyRjIwMjQwMjI2JTJGYmxvY2sxOTMxMTk1MD9nZW5lcmF0aW9uPTE3MDg5NTMwMTI5OTM3NzcmYWx0PW1lZGlhIiwKICAiY3JjMzJjIjogIktTQ1hqdz09IiwKICAiZXRhZyI6ICJDUEg5bTRxS3lZUURFQUU9Igp9Cg==",
+      "messageId": "10545576677781247",
+      "message_id": "10545576677781247",
+      "publishTime": "2024-02-26T13:10:13.073Z",
+      "publish_time": "2024-02-26T13:10:13.073Z"
+    },
+    "subscription": "projects/blockchain-analysis-pipeline/subscriptions/eventarc-us-central1-gcs-notifications-service-024171-sub-299"
+  },
+  "type": "google.cloud.pubsub.topic.v1.messagePublished",
+  "specversion": "1.0",
+  "source": "//pubsub.googleapis.com/",
+  "id": "1234567890"
+}
