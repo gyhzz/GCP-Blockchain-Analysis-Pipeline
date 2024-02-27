@@ -1,6 +1,6 @@
 # Data Pipeline for Blockchain Analytics
 
-![alt text](https://github.com/gyhzz/GCP-Blockchain-Analysis-Pipeline/blob/main/images/Blockchain%20Data%20Pipeline%20Project.png?raw=true)
+![alt text](https://github.com/gyhzz/GCP-Blockchain-Analysis-Pipeline/blob/main/images/data_architecture_2.png?raw=true)
 
 ### Ethereum Subscription Service (Data Source)
 
