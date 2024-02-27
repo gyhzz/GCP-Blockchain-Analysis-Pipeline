@@ -1,3 +1,7 @@
+### Data Architecture
+
+![alt text](https://github.com/gyhzz/GCP-Blockchain-Analysis-Pipeline/blob/main/images/Blockchain%20Data%20Pipeline%20Project.png?raw=true)
+
 ### Ethereum Subscription Service
 
 #### Description
