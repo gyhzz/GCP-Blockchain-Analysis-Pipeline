@@ -2,6 +2,17 @@
 
 ![alt text](https://github.com/gyhzz/GCP-Blockchain-Analysis-Pipeline/blob/main/images/data_architecture_2.png?raw=true)
 
+## Data Architecture and Design Choice
+The primary purpose of this project is to design and develop a portable and lightweight big data platform and is meant to serve a diverse group of users. The design of this platform focuses on key software design principles of portability, modularity, scalability, and maintainability, as well as data governance and data democratization principles such as data traceability and accessibility. Data engineers are able to develop and deploy scalable and fault-tolerant data ingestion and data processing pipelines in a consistent manner, while data analysts and business users are able to access and visualize clean and relevant data which can be be used to make business decisions.
+
+- Portability, Where Possible
+The platform is developed with portability as a core design principle, where each service is containerized and packaged together with their own depedency requirements and run on isolated environments. Each service is packaged into docker containers and deployable on Kubernetes, meaning they can be deployed and run anywhere kubernetes is supported such as on-prem systems or cloud platforms. 
+
+- Data Traceability
+In order to promote data governance and the responsible use of data, all data ingested into the data platform 
+
+- Data Democratization
+
 ### Ethereum Subscription Service (Data Source)
 
 #### Description
