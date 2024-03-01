@@ -78,3 +78,22 @@ This service monitors the blockchain-data-lake bucket for new file uploads. Each
 - The file is accessed and the block number is collected from the file
 - Block number is pushed to the kafka topic on GKE
 - Use the kafka_test_consumer_app.py to check for messages coming in in real-time
+
+
+### Spark Streaming Job on GKE
+
+#### Description
+This Spark streaming job deployed on GKE is developed in pyspark and uses the spark-sql-kafka-0-10_2.12 kafka integration library for Spark from Maven Repositories. This library is a kafka connector for Spark and allow Spark to read and publish messages to kafka topics and is installed at runtime as defined in the docker image configuration. In this application, Spark reads messages from a kafka topic that serves raw data, performs some transformation, and publishes the transformed data to another kafka topic.
+
+Spark Version: 3.5.1
+Scala Version: 2.12.18
+Kafka Version: 0.10
+Kafka Integration Library Link: https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10_2.12/3.5.1
+
+##### V1 
+- At runtime, the docker image is instructed to install the kafka integration library before starting the pyspark script
+- In the pyspark script, spark connects to the kafka topic via the kafka boostrap server's external IP, kafka topic name, and group ID
+- The message receieved from the kafka topic is in key-value structure, where the key acts as a message identifier which can be used for partitioning or grouping of data, and value stores the actual published data.
+- Abstract the value and convert it from binary format to string and perform some transformations
+- Finally, the transformed data is then pushed to another kafka topic
+- This streaming job runs continuously unless instructed to halt
