@@ -91,7 +91,7 @@ ___
 ### Spark Streaming Job on GKE
 
 #### Description
-This Spark streaming job deployed on GKE is developed in pyspark and uses the spark-sql-kafka-0-10_2.12 kafka integration library for Spark from Maven Repositories. This library is a kafka connector for Spark and allow Spark to read and publish messages to kafka topics and is installed at runtime as defined in the docker image configuration. In this application, Spark reads messages from a kafka topic that serves raw data, performs some transformation, and publishes the transformed data to another kafka topic.
+This Spark streaming job deployed on GKE is developed in pyspark and uses the spark-sql-kafka-0-10_2.12 kafka integration library for Spark from Maven Repositories. This library is a kafka connector for Spark and allows Spark to read and publish messages to kafka topics and is installed at runtime as defined in the docker image build configuration. In this application, Spark reads messages from a kafka topic that serves raw data, performs some transformation, and publishes the transformed data to another kafka topic.
 
 - **Spark Version**: 3.5.1, **Scala Version**: 2.12.18, **Kafka Version**: 0.10
 - Kafka Integration Library Link: https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10_2.12/3.5.1
