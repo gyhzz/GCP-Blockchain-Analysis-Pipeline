@@ -15,7 +15,7 @@ In order to promote data governance and the responsible use of data, all data in
 
 - Data Democratization
 All raw data and transformed data should be made easily accessible to anyone, business users or analysts, who require access as long as they have the necessary rights to access the data.
-
+ 
 ### Ethereum Subscription Service (Data Source)
 
 #### Description
