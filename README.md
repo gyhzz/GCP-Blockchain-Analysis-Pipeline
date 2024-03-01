@@ -85,10 +85,11 @@ This service monitors the blockchain-data-lake bucket for new file uploads. Each
 #### Description
 This Spark streaming job deployed on GKE is developed in pyspark and uses the spark-sql-kafka-0-10_2.12 kafka integration library for Spark from Maven Repositories. This library is a kafka connector for Spark and allow Spark to read and publish messages to kafka topics and is installed at runtime as defined in the docker image configuration. In this application, Spark reads messages from a kafka topic that serves raw data, performs some transformation, and publishes the transformed data to another kafka topic.
 
-- Spark Version: 3.5.1, Scala Version: 2.12.18, Kafka Version: 0.10
+- _Spark Version_: 3.5.1, _Scala Version_: 2.12.18, _Kafka Version_: 0.10
 - Kafka Integration Library Link: https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10_2.12/3.5.1
 
 ##### V1 
+- The Spark application is compiled into a docker image that uses Spark 3.5.1 as base image. This Spark base image contains Spark, Python3, Pip3, but no kafka connector.
 - At runtime, the docker image is instructed to install the kafka integration library before starting the pyspark script
 - In the pyspark script, spark connects to the kafka topic via the kafka boostrap server's external IP, kafka topic name, and group ID
 - The message receieved from the kafka topic is in key-value structure, where the key acts as a message identifier which can be used for partitioning or grouping of data, and value stores the actual published data.
