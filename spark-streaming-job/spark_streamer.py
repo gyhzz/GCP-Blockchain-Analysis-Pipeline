@@ -1,43 +1,45 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, expr
+from pyspark.sql.functions import concat, lit, col
 
-def main():
-    spark = SparkSession.builder \
-        .appName("Ethereum Block Processor") \
+if __name__ == "__main__":
+    # Initialize a SparkSession
+    spark = SparkSession \
+        .builder \
+        .appName("KafkaEthBlockDetailsProcessor") \
         .getOrCreate()
 
-    kafkaBootstrapServers = "34.174.40.76:9094"
-    kafkaBootstrapServers = "kafka-service-cluster-kafka-bootstrap.kafka.svc:9092"  # Kafka internal server in GKE
+    # Adjust the log level to reduce verbosity
+    spark.sparkContext.setLogLevel("WARN")
 
-    # Subscribe to the input Kafka topic
+    # Define Kafka parameters
+    kafka_bootstrap_servers = '34.174.40.76:9094'
+    subscribe_topic = 'eth-block-details'
+    publish_topic = 'eth-block-number'
+    group_id = 'main-pipe'
+
+    # Read data from the input Kafka topic
     df = spark \
         .readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", kafkaBootstrapServers) \
-        .option("subscribe", "eth_block_details") \
+        .option("kafka.bootstrap.servers", kafka_bootstrap_servers) \
+        .option("subscribe", subscribe_topic) \
+        .option("startingOffsets", "earliest") \
+        .option("kafka.group.id", group_id) \
         .load()
 
-    # # Assuming the Kafka message value is the block number in string format
-    # # Here you can define transformations, such as enriching the Ethereum block data
-    # transformedDf = df.selectExpr("CAST(value AS STRING) as block_number") \
-    #                   .selectExpr("block_number", "transformBlockData(block_number) as enriched_data")
+    # Assuming the value in the Kafka topic is in string format
+    # Perform a simple transformation: append some strings to the value
+    transformed_df = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)") \
+        .withColumn("value", concat(col("value"), lit(" - processed")))
 
-    # Write the transformed stream to another Kafka topic
-    query = df \
-        .selectExpr("CAST(block_number AS STRING) AS key", "CAST(ethereum_block AS STRING) AS value") \
+    # Write the transformed data to the output Kafka topic
+    query = transformed_df \
+        .selectExpr("CAST(key AS STRING) AS key", "CAST(value AS STRING) AS value") \
         .writeStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", kafkaBootstrapServers) \
-        .option("topic", "eth-block-number") \
+        .option("kafka.bootstrap.servers", kafka_bootstrap_servers) \
+        .option("topic", publish_topic) \
         .option("checkpointLocation", "/path/to/checkpoint/dir") \
         .start()
 
     query.awaitTermination()
-
-# def transformBlockData(blockNumber):
-#     # Placeholder for a function that enriches block data from the Ethereum network
-#     # This could involve API calls to Ethereum nodes or services to fetch additional block details
-#     return f"Enriched data for block {blockNumber}"
-
-if __name__ == "__main__":
-    main()

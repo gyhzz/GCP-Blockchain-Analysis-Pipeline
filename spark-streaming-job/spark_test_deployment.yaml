@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyspark-test-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyspark-test-app
+  template:
+    metadata:
+      labels:
+        app: pyspark-test-app
+    spec:
+      containers:
+      - name: pyspark-app
+        image: gcr.io/blockchain-analysis-pipeline/pyspark-test-app:v1
+        imagePullPolicy: Always
