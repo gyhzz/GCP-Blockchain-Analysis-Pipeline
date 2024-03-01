@@ -16,6 +16,8 @@ In order to promote data governance and the responsible use of data, all data in
 - Data Democratization
 All raw data and transformed data should be made easily accessible to anyone, business users or analysts, who require access as long as they have the necessary rights to access the data.
  
+___
+
 ### Ethereum Subscription Service (Data Source)
 
 #### Description
@@ -33,6 +35,7 @@ This service acts as a streaming data source for Ethereum blockchain data by con
 - Each block will create a new unique file Ethereum_blocks/YYYYMMDD/block<block_number>
 - GKE deployment YAML file added Kubernetes service account gcs-writer-sa to allow writing to Google Cloud Storage (Remember to create a IAM service account that has the following roles: Storage Object Admin, Service Account Token Creator. Also, make sure to allow KSA to impersonate this IAM SA by adding policy binding and kubectl annotation)
 
+___
 
 ### Kafka Service on GKE (Event Streaming)
 
@@ -59,6 +62,7 @@ This will be the main message broadcasting service for stream processing pipelin
 - Changed kafka cluster replica to 1 and kafka topic replica and partition to 1 to reduce resource allocation (due to GCP resource quota)
 - Added new listener with port 9094 to the kafka cluster to allow external communication
 
+___
 
 ### GCS Notification Service Using Cloud Function and Pubsub
 
@@ -79,6 +83,7 @@ This service monitors the blockchain-data-lake bucket for new file uploads. Each
 - Block number is pushed to the kafka topic on GKE
 - Use the kafka_test_consumer_app.py to check for messages coming in in real-time
 
+___
 
 ### Spark Streaming Job on GKE
 
