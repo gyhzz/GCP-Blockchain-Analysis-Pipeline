@@ -100,7 +100,7 @@ This Spark streaming job deployed on GKE is developed in pyspark and uses the sp
 - The Spark application is compiled into a docker image that uses Spark 3.5.1 as its base image. This Spark base image contains Spark, Python3, Pip3, but no kafka connector.
 - At runtime, the docker image is instructed to install the kafka integration library before starting the pyspark script
 - In the pyspark script, spark connects to the kafka topic via the kafka boostrap server's external IP, kafka topic name, and group ID
-- The message receieved from the kafka topic is in key-value structure, where the key acts as a message identifier which can be used for partitioning or grouping of data, and value stores the actual published data.
+- The message receieved from the kafka topic is in key-value structure, where the key acts as a message identifier which can be used for partitioning or grouping of data, and value stores the actual published data
 - Abstract the value and convert it from binary format to string and perform some transformations
 - Finally, the transformed data is then pushed to another kafka topic
 - This streaming job runs continuously unless instructed to halt
