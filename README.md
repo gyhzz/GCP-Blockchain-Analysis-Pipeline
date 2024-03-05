@@ -34,7 +34,7 @@ This service acts as a streaming data source for Ethereum blockchain data by con
 - Application contains Dockerfile and deployment configuration
 
 ##### V2
-- Instead of sending block details to stdout, block details will be uploaded to a Google Cloud Storage bucket which acts as a data lake for raw Ethereum block header JSON
+- Instead of sending block details to stdout, block details will be uploaded to a Google Cloud Storage bucket which acts as a data lake for raw Ethereum block header JSON data
 - Each block will create a new unique file Ethereum_blocks/YYYYMMDD/block<block_number>
 - GKE deployment YAML file added Kubernetes service account gcs-writer-sa to allow writing to Google Cloud Storage (Remember to create a IAM service account that has the following roles: Storage Object Admin, Service Account Token Creator. Also, make sure to allow KSA to impersonate this IAM SA by adding policy binding and kubectl annotation)
 
